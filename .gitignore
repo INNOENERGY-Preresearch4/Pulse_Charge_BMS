@@ -1,0 +1,9 @@
+*.o
+OBJ/
+*.dbgconf
+*.bak
+*.hkj
+*.zhgy_
+*.Administrator
+*.SC4274
+*.bat
