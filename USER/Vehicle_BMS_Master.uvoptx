@@ -165,32 +165,32 @@
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Min_CellVol,0x0A</ItemText>
+          <ItemText>Pack_MaxTemp,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>tempErr</ItemText>
+          <ItemText>Pack_MinTemp,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Pack_MaxTemp,0x0A</ItemText>
+          <ItemText>Cur_Ref_V_Filter</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Pack_MinTemp,0x0A</ItemText>
+          <ItemText>Cur_Ref_V_Pulse</ItemText>
         </Ww>
         <Ww>
           <count>7</count>
           <WinNumber>1</WinNumber>
-          <ItemText>testByte,0x0A</ItemText>
+          <ItemText>Remain_SOC_mAms_Pulse_Mod</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Init_SOC_mAms_Filter</ItemText>
+          <ItemText>Init_SOC_mAms_Pulse</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
@@ -200,97 +200,37 @@
         <Ww>
           <count>10</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Remain_SOC_mAms_Filter</ItemText>
+          <ItemText>Init_SOC_mAms_Filter</ItemText>
         </Ww>
         <Ww>
           <count>11</count>
           <WinNumber>1</WinNumber>
-          <ItemText>SOC_Value_Filter,0x0A</ItemText>
+          <ItemText>Remain_SOC_mAms_Filter</ItemText>
         </Ww>
         <Ww>
           <count>12</count>
           <WinNumber>1</WinNumber>
-          <ItemText>HMI_To_BMS</ItemText>
+          <ItemText>SOC_Value_Filter,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>13</count>
           <WinNumber>1</WinNumber>
-          <ItemText>HMI_To_BMS</ItemText>
+          <ItemText>SOC_Value_Pulse,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>14</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Cur_Ref_V_Filter</ItemText>
+          <ItemText>SOC_Current_Pulse</ItemText>
         </Ww>
         <Ww>
           <count>15</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Cur_Ref_V_Pulse</ItemText>
+          <ItemText>SOC_Current_Filter</ItemText>
         </Ww>
         <Ww>
           <count>16</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Remain_SOC_mAms_Pulse_Mod</ItemText>
-        </Ww>
-        <Ww>
-          <count>17</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Init_SOC_mAms_Pulse</ItemText>
-        </Ww>
-        <Ww>
-          <count>18</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Remain_SOC_mAms_Pulse</ItemText>
-        </Ww>
-        <Ww>
-          <count>19</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Init_SOC_mAms_Filter</ItemText>
-        </Ww>
-        <Ww>
-          <count>20</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Remain_SOC_mAms_Filter</ItemText>
-        </Ww>
-        <Ww>
-          <count>21</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Run_Time,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>22</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>SOC_Value_Filter,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>23</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>SOC_Value_Pulse,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>24</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Cur_Measure_V_Pulse</ItemText>
-        </Ww>
-        <Ww>
-          <count>25</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>SOC_Current_Pulse</ItemText>
-        </Ww>
-        <Ww>
-          <count>26</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>SOC_Current_Filter</ItemText>
-        </Ww>
-        <Ww>
-          <count>27</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Cur_Measure_V_Filter</ItemText>
-        </Ww>
-        <Ww>
-          <count>28</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>ADC1_ConvertValueRead,0x0A</ItemText>
+          <ItemText>Battery_Mode_Time,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
