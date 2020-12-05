@@ -503,19 +503,22 @@ void Fault_Diagnose_Discharge_COMM(void)
 	 } 
 	 else 
 	 {
-			if(SOC_Current_Filter < Discharge_Current_Over_PRE_Free)  //9A
-			{
-					 dcurrent_count++; 
-			} 
-			else 
-			{
-					 dcurrent_count=0; 
-			}
-			if(dcurrent_count>3) 
-			{
-					 BMS_To_HMI.Pack_Alarms[1]&=(~(ALARM_DCOVERCURRENT_PRE_BIT)); 
-					 dcurrent_count=0;
-			} 
+			 if((BMS_To_HMI.Pack_Alarms[2]&ALARM_CUTOFF_DCOVERCURRENT_BIT)==0)//如果没发生过放电切断故障，才可恢复
+			 {
+						if(SOC_Current_Filter < Discharge_Current_Over_PRE_Free)  //9A
+						{
+								 dcurrent_count++; 
+						} 
+						else 
+						{
+								 dcurrent_count=0; 
+						}
+						if(dcurrent_count>3) 
+						{
+								 BMS_To_HMI.Pack_Alarms[1]&=(~(ALARM_DCOVERCURRENT_PRE_BIT)); 
+								 dcurrent_count=0;
+						} 
+			 }
 	 }	
 	 
 	 //放电过流切断故障           6
@@ -562,19 +565,22 @@ void Fault_Diagnose_Charge(void)
 		 } 
 		 else 
 		 {
-				 if(SOC_Current_Pulse > Charge_Current_Over_PRE_Free) //-5.5A
-				 {
-						 ccurrent_count++; 
-				 } 
-				 else 
-				 {
-						 ccurrent_count=0; 
-				 }
-				 if(ccurrent_count>2) 
-				 {
-						 BMS_To_HMI.Pack_Alarms[1]&=(~(ALARM_COVERCURRENT_PRE_BIT));  
-						 ccurrent_count=0;
-				 }
+				 if((BMS_To_HMI.Pack_Alarms[2]&ALARM_CUTOFF_COVERCURRENT_BIT)==0) 
+					{ 
+							 if(SOC_Current_Pulse > Charge_Current_Over_PRE_Free) //-5.5A
+							 {
+									 ccurrent_count++; 
+							 } 
+							 else 
+							 {
+									 ccurrent_count=0; 
+							 }
+							 if(ccurrent_count>2) 
+							 {
+									 BMS_To_HMI.Pack_Alarms[1]&=(~(ALARM_COVERCURRENT_PRE_BIT));  
+									 ccurrent_count=0;
+							 }
+					}
 		  }
 		 
 		  //充电过流切断故障           6

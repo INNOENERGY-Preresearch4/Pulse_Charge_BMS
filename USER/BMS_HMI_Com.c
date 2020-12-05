@@ -74,12 +74,15 @@ void HMI_To_BMS_Conversion(void)
 								case HMI_To_BMS_CMD_Charge:
 									Battery_Mode_Time_Prcess = ((u16)HMI_To_BMS.Cmd_ParamL+(((u16)HMI_To_BMS.Cmd_ParamH)<<8))*60;
 									if((Battery_Mode_Time_Prcess >= 60)&&(Battery_Mode_Time_Prcess <= 86400))
-									{		
-											Battery_Mode_Time = Battery_Mode_Time_Prcess;
-											CMD_Battery_Mode = CMD_Charge;
-											Relay_ON;
-											TIM2->CNT = 0;
-											HAL_TIM_Base_Start_IT(&TIM2_Handler);
+									{
+											if(BMS_To_HMI.Pack_Alarms[2]==0)
+											{
+													Battery_Mode_Time = Battery_Mode_Time_Prcess;
+													CMD_Battery_Mode = CMD_Charge;
+													Relay_ON;
+													TIM2->CNT = 0;
+													HAL_TIM_Base_Start_IT(&TIM2_Handler);
+											}
 									}
 									break;
 								//************************·Åµç**********************	
@@ -87,11 +90,14 @@ void HMI_To_BMS_Conversion(void)
 									Battery_Mode_Time_Prcess = ((u16)HMI_To_BMS.Cmd_ParamL+(((u16)HMI_To_BMS.Cmd_ParamH)<<8))*60;
 									if((Battery_Mode_Time_Prcess >= 60)&&(Battery_Mode_Time_Prcess <= 86400))
 									{
-											Battery_Mode_Time = Battery_Mode_Time_Prcess;
-											CMD_Battery_Mode = CMD_Discharge;
-											Relay_ON;
-											TIM2->CNT = 0;
-											HAL_TIM_Base_Start_IT(&TIM2_Handler);
+											if(BMS_To_HMI.Pack_Alarms[2]==0)
+											{
+													Battery_Mode_Time = Battery_Mode_Time_Prcess;
+													CMD_Battery_Mode = CMD_Discharge;
+													Relay_ON;
+													TIM2->CNT = 0;
+													HAL_TIM_Base_Start_IT(&TIM2_Handler);
+											}
 									}
 									break;
 

@@ -67,24 +67,24 @@
 #define TEMP_AD_ERR              	 	 (250)    //温度采集故障阈值0.1℃
 #define TEMP_AD_ERR_FREE         	 	 (150)   //温度采集故障解除阈值0.1℃
 
-#define TEMP_HIGH_PRE                	 (450)      //放电过热故障预警门限值0.1℃
-#define TEMP_HIGH_PRE_FREE           	 (400)      //放电过热故障预警解除门限值0.1℃
+#define TEMP_HIGH_PRE                	 (450)      //放电过热故障预警门限值0.1℃  450
+#define TEMP_HIGH_PRE_FREE           	 (400)      //放电过热故障预警解除门限值0.1℃  400
 
-#define TEMP_LOW_PRE                    (50)     //放电低温故障预警门限值0.1℃
-#define TEMP_LOW_PRE_FREE               (100)     //放电低温故障预警解除门限值0.1℃
+#define TEMP_LOW_PRE                    (50)     //放电低温故障预警门限值0.1℃   50
+#define TEMP_LOW_PRE_FREE               (100)     //放电低温故障预警解除门限值0.1℃  100
 
 #define OVERPACKVOLTAGE_PRE           	(2880)  //电池组过压预警限值  0.01V  单体3600mV
 #define OVERPACKVOLTAGE_PRE_FREE      	(2840)  //电池组过压预警解除限值		0.01V	单体3550mV
 
-#define LOWPACKVOLTAGE_PRE            	(2080)    //电池组欠压预警限值20.00V  0.01V  单体2600mV
-#define LOWPACKVOLTAGE_PRE_FREE       	(2120)    //电池组欠压预警解除限值20.40V  0.01V	单体2650mV
+#define LOWPACKVOLTAGE_PRE            	(2080)    //电池组欠压预警限值20.80V  0.01V  单体2600mV
+#define LOWPACKVOLTAGE_PRE_FREE       	(2120)    //电池组欠压预警解除限值21.20V  0.01V	单体2650mV
 
 //Pack_Alarms[1]
-#define Charge_Current_Over_PRE            (-6000)     //充电电流过大预警门限值float mA
-#define Charge_Current_Over_PRE_Free       (-5500)     //充电电流过大预警解除门限值float mA
+#define Charge_Current_Over_PRE            (-6500)     //充电电流过大预警门限值float mA
+#define Charge_Current_Over_PRE_Free       (-6000)     //充电电流过大预警解除门限值float mA
 
-#define Discharge_Current_Over_PRE          (10000)     //放电电流过大门预警限值float mA
-#define Discharge_Current_Over_PRE_Free     (9000)     //放电电流过大解除预警门限值float mA
+#define Discharge_Current_Over_PRE          (5500)     //放电电流过大门预警限值float mA  5.5A
+#define Discharge_Current_Over_PRE_Free     (5000)     //放电电流过大解除预警门限值float mA  5A
 //
 #define CELL_LOWVOLTAGE_PRE               (2600)    	//单体欠压预警限值2600mV
 #define CELL_LOWVOLTAGE_PRE_FREE            (2650)    //单体欠压解除预警限值2650mV
@@ -96,13 +96,13 @@
 #define CELL_DIFF_VOLTAGE_ERR_FREE   			(100)   //电芯模块不平衡故障解除压差?mV
 
 //Pack_Alarms[2]
-#define CUTOFF_OVERTEMP                 	(500)      //过热切断故障门限值0.1℃
+#define CUTOFF_OVERTEMP                 	(500)      //过热切断故障门限值0.1℃ 500
 #define CUTOFF_OVERPACKVOLTAGE            (2920)    //总过压切断电压限值 29.20 3.65 0.01V
 #define CUTOFF_LOWPACKVOLTAGE            	(2000)    //总欠压切断电压限值 20.00 2.5 0.01V
 #define CUTOFF_OVERCELLVOLTAGE            (3650)    //单体过压切断限值3650mV
 #define CUTOFF_LOWCELLVOLTAGE             (2500)    //单体欠压切断限值2500mV
-#define CUTOFF_Charge_Current_Over        (-6500)    //充电电流过大切断float mA
-#define CUTOFF_Discharge_Current_Over      (11000)    //放电电流过大切断float mA
+#define CUTOFF_Charge_Current_Over        (-7000)    //充电电流过大切断float mA
+#define CUTOFF_Discharge_Current_Over      (6000)    //放电电流过大切断float mA  6A
 
 /*
 *********************************************************************************************************
