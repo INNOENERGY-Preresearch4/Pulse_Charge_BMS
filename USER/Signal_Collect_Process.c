@@ -328,7 +328,7 @@ void Cur_Ref_Update(void)
 
 void Full_Capacity_Judgment(void)//³äµçÊ±ÅÐ¶ÏÊÇ·ñ³åÂú£¬·ÅµçÊ±ÅÐ¶ÏÊÇ·ñ²»Âú£¬²»³å²»·Å²»¸Ä±ä×´Ì¬£¬³äÂúºó¶ÏµçÔÚÉÏµç£¬¶ÁSOC´óÓÚ995»¹°Ñ³äÂúÖÃ1
 {
-//			 if((Full_Capacity_Flag==0)||((BMS_To_HMI.Battery_Status&0x01)==1))
+//		 if((Full_Capacity_Flag==0)||((BMS_To_HMI.Battery_Status&0x01)==1))
 			 if((BMS_To_HMI.Battery_Status&0x01)==1)
 			 {          
 						 if(Max_CellVol >= CHARG_FULL_CELL_VOLTAGE)   //
@@ -339,7 +339,7 @@ void Full_Capacity_Judgment(void)//³äµçÊ±ÅÐ¶ÏÊÇ·ñ³åÂú£¬·ÅµçÊ±ÅÐ¶ÏÊÇ·ñ²»Âú£¬²»³å²
 						 {
 								 Full_Capacity_Num=0; 
 						 }
-						 if(Full_Capacity_Num>15) 
+						 if(Full_Capacity_Num>=3) 
 						 {
 								 Full_Capacity_Flag = 1;
 							 
@@ -348,8 +348,8 @@ void Full_Capacity_Judgment(void)//³äµçÊ±ÅÐ¶ÏÊÇ·ñ³åÂú£¬·ÅµçÊ±ÅÐ¶ÏÊÇ·ñ²»Âú£¬²»³å²
 								 HAL_TIM_Base_Stop_IT(&TIM2_Handler);
 								 TIM2->CNT = 0;
 							 
-							   Remain_SOC_mAms_Pulse = Init_SOC_mAms_Pulse;
-								 Remain_SOC_mAms_Filter = Init_SOC_mAms_Filter;
+//							   Remain_SOC_mAms_Pulse = Init_SOC_mAms_Pulse*0.9f;
+//								 Remain_SOC_mAms_Filter = Init_SOC_mAms_Filter*0.9f;
 							 
 								 Full_Capacity_Num=0;
 						 } 
@@ -365,7 +365,7 @@ void Full_Capacity_Judgment(void)//³äµçÊ±ÅÐ¶ÏÊÇ·ñ³åÂú£¬·ÅµçÊ±ÅÐ¶ÏÊÇ·ñ²»Âú£¬²»³å²
 						 {
 								 Full_Capacity_Num=0; 
 						 }
-						 if(Full_Capacity_Num>10) 
+						 if(Full_Capacity_Num>=5) 
 						 {
 								 Full_Capacity_Flag = 0;  
 								 Full_Capacity_Num=0;

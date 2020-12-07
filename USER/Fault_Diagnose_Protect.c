@@ -339,6 +339,8 @@ void Fault_Diagnose_Vol(void)
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_LOWCELLVOLTAGE_BIT;
 					 BMS_To_HMI.Pack_Alarms[1] |= ALARM_CELLVOLTAGE_LOW_PRE_BIT;//‘§æØπ ’œ“≤÷√Œª
 					 RELAY_OFF();
+					 Remain_SOC_mAms_Pulse = Init_SOC_mAms_Pulse*0.1f;
+					 Remain_SOC_mAms_Filter = Init_SOC_mAms_Filter*0.1f;
 			 } 
 	 }
 }
