@@ -76,18 +76,18 @@
 #define OVERPACKVOLTAGE_PRE           	(2880)  //电池组过压预警限值  0.01V  单体3600mV
 #define OVERPACKVOLTAGE_PRE_FREE      	(2840)  //电池组过压预警解除限值		0.01V	单体3550mV
 
-#define LOWPACKVOLTAGE_PRE            	(2080)    //电池组欠压预警限值20.80V  0.01V  单体2600mV
-#define LOWPACKVOLTAGE_PRE_FREE       	(2120)    //电池组欠压预警解除限值21.20V  0.01V	单体2650mV
+#define LOWPACKVOLTAGE_PRE            	(2120)    //电池组欠压预警限值21.20V  0.01V  单体2650mV
+#define LOWPACKVOLTAGE_PRE_FREE       	(2160)    //电池组欠压预警解除限值21.60V  0.01V	单体2700mV
 
 //Pack_Alarms[1]
-#define Charge_Current_Over_PRE            (-6500)     //充电电流过大预警门限值float mA
-#define Charge_Current_Over_PRE_Free       (-6000)     //充电电流过大预警解除门限值float mA
+#define Charge_Current_Over_PRE            (-6000)     //充电电流过大预警门限值float mA
+#define Charge_Current_Over_PRE_Free       (-5500)     //充电电流过大预警解除门限值float mA
 
 #define Discharge_Current_Over_PRE          (5500)     //放电电流过大门预警限值float mA  5.5A
 #define Discharge_Current_Over_PRE_Free     (5000)     //放电电流过大解除预警门限值float mA  5A
 //
-#define CELL_LOWVOLTAGE_PRE               (2600)    	//单体欠压预警限值2600mV
-#define CELL_LOWVOLTAGE_PRE_FREE            (2650)    //单体欠压解除预警限值2650mV
+#define CELL_LOWVOLTAGE_PRE               (2650)    	//单体欠压预警限值2650mV
+#define CELL_LOWVOLTAGE_PRE_FREE            (2700)    //单体欠压解除预警限值2700mV
 //
 #define CELL_OVERVOLTAGE_PRE               (3600)    	//单体过压预警限值3600mV
 #define CELL_OVERVOLTAGE_PRE_FREE           (3550)    //单体过压解除预警限值 3550mV
@@ -98,10 +98,10 @@
 //Pack_Alarms[2]
 #define CUTOFF_OVERTEMP                 	(500)      //过热切断故障门限值0.1℃ 500
 #define CUTOFF_OVERPACKVOLTAGE            (2920)    //总过压切断电压限值 29.20 3.65 0.01V
-#define CUTOFF_LOWPACKVOLTAGE            	(2000)    //总欠压切断电压限值 20.00 2.5 0.01V
+#define CUTOFF_LOWPACKVOLTAGE            	(2080)    //总欠压切断电压限值 20.80 2.6 0.01V
 #define CUTOFF_OVERCELLVOLTAGE            (3650)    //单体过压切断限值3650mV
-#define CUTOFF_LOWCELLVOLTAGE             (2500)    //单体欠压切断限值2500mV
-#define CUTOFF_Charge_Current_Over        (-7000)    //充电电流过大切断float mA
+#define CUTOFF_LOWCELLVOLTAGE             (2600)    //单体欠压切断限值2600mV
+#define CUTOFF_Charge_Current_Over        (-6500)    //充电电流过大切断float mA
 #define CUTOFF_Discharge_Current_Over      (6000)    //放电电流过大切断float mA  6A
 
 /*

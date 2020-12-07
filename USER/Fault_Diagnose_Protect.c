@@ -43,7 +43,7 @@ void Fault_Diagnose_Vol(void)
 		 {
 				 vol_error_cont=0;
 		 }
-		 if(vol_error_cont>20) 
+		 if(vol_error_cont>=6) 
 		 {
 				BMS_To_HMI.Pack_Alarms[0] |= ALARM_VOLTAGE_AD_BIT;
 				vol_error_cont=0;
@@ -57,7 +57,7 @@ void Fault_Diagnose_Vol(void)
 		 {
 				 vol_error_cont=0;
 		 }
-		 if(vol_error_cont>10) 
+		 if(vol_error_cont>=3) 
 		 {
 				BMS_To_HMI.Pack_Alarms[0] &= (~(ALARM_VOLTAGE_AD_BIT));
 				vol_error_cont=0;
@@ -75,7 +75,7 @@ void Fault_Diagnose_Vol(void)
 			 {
 					 overpackvoltage_count=0; 
 			 }
-			 if(overpackvoltage_count>4) 
+			 if(overpackvoltage_count>=3) 
 			 {
 					 BMS_To_HMI.Pack_Alarms[0]|=ALARM_PACKVOLTAGE_OVER_PRE_BIT;
 					 Full_Capacity_Flag =1;
@@ -84,18 +84,21 @@ void Fault_Diagnose_Vol(void)
 	 } 
 	 else 
 	 {
-			 if(BMS_To_HMI.Total_Voltage<=OVERPACKVOLTAGE_PRE_FREE) 
-			 {
-					 overpackvoltage_count++; 
-			 } 
-			 else 
-			 {
-					 overpackvoltage_count=0; 
-			 }
-			 if(overpackvoltage_count>2) 
-			 {
-					 BMS_To_HMI.Pack_Alarms[0]&=(~(ALARM_PACKVOLTAGE_OVER_PRE_BIT));  
-					 overpackvoltage_count=0;
+			 if((BMS_To_HMI.Pack_Alarms[2]&ALARM_CUTOFF_OVERPACKVOLTAGE_BIT)==0) 
+			 { 
+					 if(BMS_To_HMI.Total_Voltage<=OVERPACKVOLTAGE_PRE_FREE) 
+					 {
+							 overpackvoltage_count++; 
+					 } 
+					 else 
+					 {
+							 overpackvoltage_count=0; 
+					 }
+					 if(overpackvoltage_count>=3) 
+					 {
+							 BMS_To_HMI.Pack_Alarms[0]&=(~(ALARM_PACKVOLTAGE_OVER_PRE_BIT));  
+							 overpackvoltage_count=0;
+					 }
 			 }
 	 }
 	 
@@ -110,7 +113,7 @@ void Fault_Diagnose_Vol(void)
 			 {
 					 lowpackvoltage_count=0; 
 			 }
-			 if(lowpackvoltage_count>4) 
+			 if(lowpackvoltage_count>=3) 
 			 {
 					 BMS_To_HMI.Pack_Alarms[0] |= ALARM_PACKVOLTAGE_LOW_PRE_BIT;
 					 lowpackvoltage_count=0;
@@ -118,18 +121,21 @@ void Fault_Diagnose_Vol(void)
 	 } 
 	 else 
 	 {
-			 if(BMS_To_HMI.Total_Voltage >= LOWPACKVOLTAGE_PRE_FREE) 
-			 {
-					 lowpackvoltage_count++; 
-			 } 
-			 else 
-			 {
-					 lowpackvoltage_count=0; 
-			 }
-			 if(lowpackvoltage_count>2) 
-			 {
-					 BMS_To_HMI.Pack_Alarms[0]&=(~(ALARM_PACKVOLTAGE_LOW_PRE_BIT));  
-					 lowpackvoltage_count=0;
+       if((BMS_To_HMI.Pack_Alarms[2]&ALARM_CUTOFF_LOWPACKVOLTAGE_BIT)==0) 
+	     {
+					 if(BMS_To_HMI.Total_Voltage >= LOWPACKVOLTAGE_PRE_FREE) 
+					 {
+							 lowpackvoltage_count++; 
+					 } 
+					 else 
+					 {
+							 lowpackvoltage_count=0; 
+					 }
+					 if(lowpackvoltage_count>=3) 
+					 {
+							 BMS_To_HMI.Pack_Alarms[0]&=(~(ALARM_PACKVOLTAGE_LOW_PRE_BIT));  
+							 lowpackvoltage_count=0;
+					 }
 			 }
 	 }
 	 
@@ -144,7 +150,7 @@ void Fault_Diagnose_Vol(void)
 			 {
 					 lowcellvoltage_count=0; 
 			 }
-			 if(lowcellvoltage_count>4) 
+			 if(lowcellvoltage_count>=3) 
 			 {
 					 lowcellvoltage_count=0;
 					 BMS_To_HMI.Pack_Alarms[1] |= ALARM_CELLVOLTAGE_LOW_PRE_BIT;  
@@ -152,19 +158,22 @@ void Fault_Diagnose_Vol(void)
 	 } 
 	 else 
 	 {
-			 if(Min_CellVol>CELL_LOWVOLTAGE_PRE_FREE) 
-			 {
-					 lowcellvoltage_count++;
-			 } 
-			 else 
-			 {
-					 lowcellvoltage_count=0; 
+			 if((BMS_To_HMI.Pack_Alarms[2]&ALARM_CUTOFF_LOWCELLVOLTAGE_BIT)==0) 
+			 { 
+					 if(Min_CellVol>CELL_LOWVOLTAGE_PRE_FREE) 
+					 {
+							 lowcellvoltage_count++;
+					 } 
+					 else 
+					 {
+							 lowcellvoltage_count=0; 
+					 }
+					 if(lowcellvoltage_count>=3) 
+					 {  
+							 lowcellvoltage_count=0;
+							 BMS_To_HMI.Pack_Alarms[1] &= (~(ALARM_CELLVOLTAGE_LOW_PRE_BIT));
+					 } 
 			 }
-			 if(lowcellvoltage_count>2) 
-			 {  
-					 lowcellvoltage_count=0;
-					 BMS_To_HMI.Pack_Alarms[1] &= (~(ALARM_CELLVOLTAGE_LOW_PRE_BIT));
-			 } 
 	 } 						   //
 		 
 	 //电池单体过压预警            4
@@ -178,7 +187,7 @@ void Fault_Diagnose_Vol(void)
 			 {
 					 overcellvoltage_count=0; 
 			 }
-			 if(overcellvoltage_count>4) 
+			 if(overcellvoltage_count>=3) 
 			 {
 					 overcellvoltage_count=0;
 					 BMS_To_HMI.Pack_Alarms[1] |= ALARM_CELLVOLTAGE_OVER_PRE_BIT;
@@ -187,19 +196,22 @@ void Fault_Diagnose_Vol(void)
 	 } 
 	 else 
 	 {
-			 if(Max_CellVol<CELL_OVERVOLTAGE_PRE_FREE) 
+			 if((BMS_To_HMI.Pack_Alarms[2]&ALARM_CUTOFF_OVERCELLVOLTAGE_BIT)==0) 
 			 {
-					 overcellvoltage_count++;
-			 } 
-			 else 
-			 {
-					 overcellvoltage_count=0; 
-			 }
-			 if(overcellvoltage_count>2) 
-			 {  
-					 overcellvoltage_count=0;
-					 BMS_To_HMI.Pack_Alarms[1] &= (~(ALARM_CELLVOLTAGE_OVER_PRE_BIT));           
-			 } 
+					 if(Max_CellVol<CELL_OVERVOLTAGE_PRE_FREE) 
+					 {
+							 overcellvoltage_count++;
+					 } 
+					 else 
+					 {
+							 overcellvoltage_count=0; 
+					 }
+					 if(overcellvoltage_count>=3) 
+					 {  
+							 overcellvoltage_count=0;
+							 BMS_To_HMI.Pack_Alarms[1] &= (~(ALARM_CELLVOLTAGE_OVER_PRE_BIT));           
+					 }
+			 }					 
 	 }
 	 
 	 //电池单体不平衡        5
@@ -263,7 +275,7 @@ void Fault_Diagnose_Vol(void)
 			 {
 					 cutoff_overpackvoltage_count=0; 
 			 }
-			 if(cutoff_overpackvoltage_count>2) 
+			 if(cutoff_overpackvoltage_count>=2) 
 			 {
 					 cutoff_overpackvoltage_count=0;
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_OVERPACKVOLTAGE_BIT;
@@ -283,7 +295,7 @@ void Fault_Diagnose_Vol(void)
 			 {
 					 cutoff_lowpackvoltage_count=0; 
 			 }
-			 if(cutoff_lowpackvoltage_count>2) 
+			 if(cutoff_lowpackvoltage_count>=2) 
 			 {
 					 cutoff_lowpackvoltage_count=0;
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_LOWPACKVOLTAGE_BIT;
@@ -302,7 +314,7 @@ void Fault_Diagnose_Vol(void)
 			 {
 					 cutoff_overcellvoltage_count=0; 
 			 }
-			 if(cutoff_overcellvoltage_count>2) 
+			 if(cutoff_overcellvoltage_count>=2) 
 			 {
 					 cutoff_overcellvoltage_count=0;
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_OVERCELLVOLTAGE_BIT;
@@ -321,7 +333,7 @@ void Fault_Diagnose_Vol(void)
 			 {
 					 cutoff_lowcellvoltage_count=0; 
 			 }
-			 if(cutoff_lowcellvoltage_count>2) 
+			 if(cutoff_lowcellvoltage_count>=2) 
 			 {
 					 cutoff_lowcellvoltage_count=0;
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_LOWCELLVOLTAGE_BIT;
@@ -344,7 +356,7 @@ void Fault_Diagnose_Temp(void)
 		 {
 				 temp_error_cont=0;
 		 }
-		 if(temp_error_cont>6) 
+		 if(temp_error_cont>=6) 
 		 {
 				BMS_To_HMI.Pack_Alarms[0] |= ALARM_TEMP_AD_BIT;
 				temp_error_cont=0;
@@ -358,7 +370,7 @@ void Fault_Diagnose_Temp(void)
 		 {
 				 temp_error_cont=0;
 		 }
-		 if(temp_error_cont>3) 
+		 if(temp_error_cont>=3) 
 		 {
 				BMS_To_HMI.Pack_Alarms[0] &= (~(ALARM_TEMP_AD_BIT));
 				temp_error_cont=0;
@@ -376,7 +388,7 @@ void Fault_Diagnose_Temp(void)
 		 {
 				tempover_count=0; 
 		 }
-		 if(tempover_count>6) 
+		 if(tempover_count>=3) 
 		 {
 				BMS_To_HMI.Pack_Alarms[0]|=ALARM_OVERTEMP_PRE_BIT;
 				tempover_count=0;
@@ -392,7 +404,7 @@ void Fault_Diagnose_Temp(void)
 		 {
 				 tempover_count=0; 
 		 }
-		 if(tempover_count>3) 
+		 if(tempover_count>=3) 
 		 {
 				 BMS_To_HMI.Pack_Alarms[0]&=(~(ALARM_OVERTEMP_PRE_BIT));  
 				 tempover_count=0;                    
@@ -410,7 +422,7 @@ void Fault_Diagnose_Temp(void)
 			 {
 					 templow_count=0; 
 			 }
-			 if(templow_count>6) 
+			 if(templow_count>=3) 
 			 {
 					 BMS_To_HMI.Pack_Alarms[0]|=ALARM_LOWTEMP_PRE_BIT;
 					 templow_count=0;
@@ -426,7 +438,7 @@ void Fault_Diagnose_Temp(void)
 			 {
 					 templow_count=0; 
 			 }
-			 if(templow_count>3) 
+			 if(templow_count>=3) 
 			 {
 					 BMS_To_HMI.Pack_Alarms[0]&=(~(ALARM_LOWTEMP_PRE_BIT));  
 					 templow_count=0;
@@ -444,7 +456,7 @@ void Fault_Diagnose_Temp(void)
 			 {
 					 cutoff_tempover_count=0; 
 			 }
-			 if(cutoff_tempover_count>2) 
+			 if(cutoff_tempover_count>=2) 
 			 {
 					 cutoff_tempover_count=0;
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_OVERTEMP_BIT;
@@ -467,7 +479,7 @@ void Fault_Diagnose_Discharge_COMM(void)
 		 {
 				Host_COMM_error_cont=0;
 		 }
-		 if(Host_COMM_error_cont>20)     //2s
+		 if(Host_COMM_error_cont>=20)     //2s
 		 {
 				Host_COMM_error_flag=1;
 				Host_COMM_error_cont=0;
@@ -487,7 +499,7 @@ void Fault_Diagnose_Discharge_COMM(void)
 	 //电池放电电流过大预警          2
 	 if((BMS_To_HMI.Pack_Alarms[1]&ALARM_DCOVERCURRENT_PRE_BIT)==0) 
 	 {          
-			if(SOC_Current_Filter > Discharge_Current_Over_PRE)   //10A
+			if(SOC_Current_Filter > Discharge_Current_Over_PRE)   //5.5A
 			{
 					 dcurrent_count++; 
 			} 
@@ -495,7 +507,7 @@ void Fault_Diagnose_Discharge_COMM(void)
 			{
 					 dcurrent_count=0; 
 			}
-			if(dcurrent_count>6) 
+			if(dcurrent_count>=3) 
 			{
 					 BMS_To_HMI.Pack_Alarms[1]|=ALARM_DCOVERCURRENT_PRE_BIT; 
 					 dcurrent_count=0;
@@ -505,7 +517,7 @@ void Fault_Diagnose_Discharge_COMM(void)
 	 {
 			 if((BMS_To_HMI.Pack_Alarms[2]&ALARM_CUTOFF_DCOVERCURRENT_BIT)==0)//如果没发生过放电切断故障，才可恢复
 			 {
-						if(SOC_Current_Filter < Discharge_Current_Over_PRE_Free)  //9A
+						if(SOC_Current_Filter < Discharge_Current_Over_PRE_Free)  //5A
 						{
 								 dcurrent_count++; 
 						} 
@@ -513,7 +525,7 @@ void Fault_Diagnose_Discharge_COMM(void)
 						{
 								 dcurrent_count=0; 
 						}
-						if(dcurrent_count>3) 
+						if(dcurrent_count>=3) 
 						{
 								 BMS_To_HMI.Pack_Alarms[1]&=(~(ALARM_DCOVERCURRENT_PRE_BIT)); 
 								 dcurrent_count=0;
@@ -532,7 +544,7 @@ void Fault_Diagnose_Discharge_COMM(void)
 			 {
 					 cutoff_dcurrent_count=0; 
 			 }
-			 if(cutoff_dcurrent_count>2) 
+			 if(cutoff_dcurrent_count>=2) 
 			 {
 					 cutoff_dcurrent_count=0;
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_DCOVERCURRENT_BIT;
@@ -557,7 +569,7 @@ void Fault_Diagnose_Charge(void)
 				 {
 						 ccurrent_count=0; 
 				 }
-				 if(ccurrent_count>4) 
+				 if(ccurrent_count>=3) 
 				 {
 						 BMS_To_HMI.Pack_Alarms[1]|=ALARM_COVERCURRENT_PRE_BIT;
 						 ccurrent_count=0;
@@ -575,7 +587,7 @@ void Fault_Diagnose_Charge(void)
 							 {
 									 ccurrent_count=0; 
 							 }
-							 if(ccurrent_count>2) 
+							 if(ccurrent_count>=3) 
 							 {
 									 BMS_To_HMI.Pack_Alarms[1]&=(~(ALARM_COVERCURRENT_PRE_BIT));  
 									 ccurrent_count=0;
@@ -594,7 +606,7 @@ void Fault_Diagnose_Charge(void)
 				 {
 						 cutoff_ccurrent_count=0; 
 				 }
-				 if(cutoff_ccurrent_count>2) 
+				 if(cutoff_ccurrent_count>=2) 
 				 {
 						 cutoff_ccurrent_count=0;
 						 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_COVERCURRENT_BIT;

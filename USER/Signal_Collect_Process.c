@@ -40,9 +40,9 @@
 
 float Get_Pulse_Current(void)
 {
-		u8 i;
+//		u8 i;
 		float cur;
-		cur = (Cur_Measure_V_Pulse-Cur_Ref_V_Pulse)/90.0f*1000;
+		cur = (Cur_Measure_V_Pulse-Cur_Ref_V_Pulse)/90.0f*1000*0.985f;
 		if((-100<cur)&&(cur<100))//去掉0点漂移和波动
 		{
 			cur = 0;
@@ -54,7 +54,7 @@ float Get_Pulse_Current(void)
 float Get_Filter_Current(void)
 {
 		volatile float cur;
-		cur = (Cur_Measure_V_Filter-Cur_Ref_V_Filter)/90.0f*1000;
+		cur = (Cur_Measure_V_Filter-Cur_Ref_V_Filter)/90.0f*1000*0.985f;
 		if((-100<cur)&&(cur<100))//去掉0点漂移和波动
 		{
 			cur = 0;

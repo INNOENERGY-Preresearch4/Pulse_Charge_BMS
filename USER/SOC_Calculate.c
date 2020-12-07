@@ -186,7 +186,7 @@ void Remain_SOC_mAms_Fliter_Update(void)
 //		Remain_SOC_mAms_Filter = Remain_SOC_mAms_Filter- Filter_SOC_Change;
 		Remain_SOC_mAms_Filter -= (SOC_Current_Filter+SOC_Current_Filter_Pre)/2.0f*10;
 		SOC_Current_Filter_Pre = SOC_Current_Filter;
-		BMS_To_HMI.Total_Current = (s16)(SOC_Current_Filter/10+0.5);
+		BMS_To_HMI.Total_Current = (s16)(SOC_Current_Filter/10+0.5f);
 		Remain_SOC_mAms_Filter = range(Remain_SOC_mAms_Filter, 0, Init_SOC_mAms_Filter);
 }
 
