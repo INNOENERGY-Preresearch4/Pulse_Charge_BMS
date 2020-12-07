@@ -151,8 +151,8 @@ void TIM2_IRQHandler(void)
 		{
 //				if((CMD_Battery_Mode == CMD_Charge)||(CMD_Battery_Mode == CMD_Discharge))
 //				{
-						Relay_OFF;
-						Relay_OFF;
+						RELAY_OFF();
+						RELAY_OFF();
 						CMD_Battery_Mode=0;	
 						HAL_TIM_Base_Stop_IT(&TIM2_Handler);
 						TIM2->CNT = 0;					

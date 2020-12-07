@@ -59,8 +59,8 @@ void HMI_To_BMS_Conversion(void)
 		{
 				if((HMI_To_BMS.Cmd_STOP&0x01)==0x01)
 				{
-						Relay_OFF;
-						Relay_OFF;
+						RELAY_OFF();
+						RELAY_OFF();
 						CMD_Battery_Mode = 0;
 						Battery_Mode_Time = 0;
 						HAL_TIM_Base_Stop_IT(&TIM2_Handler);
@@ -79,7 +79,7 @@ void HMI_To_BMS_Conversion(void)
 											{
 													Battery_Mode_Time = Battery_Mode_Time_Prcess;
 													CMD_Battery_Mode = CMD_Charge;
-													Relay_ON;
+													RELAY_ON();
 													TIM2->CNT = 0;
 													HAL_TIM_Base_Start_IT(&TIM2_Handler);
 											}
@@ -94,7 +94,7 @@ void HMI_To_BMS_Conversion(void)
 											{
 													Battery_Mode_Time = Battery_Mode_Time_Prcess;
 													CMD_Battery_Mode = CMD_Discharge;
-													Relay_ON;
+													RELAY_ON();
 													TIM2->CNT = 0;
 													HAL_TIM_Base_Start_IT(&TIM2_Handler);
 											}

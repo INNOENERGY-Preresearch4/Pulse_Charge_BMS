@@ -15,6 +15,7 @@
 */
 
 #include "BSP_GPIO.h"
+#include  "Globals.h"
 
 /*
 *********************************************************************************************************
@@ -61,5 +62,19 @@ void GPIO_Init(void)
 		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);	//
 
 }
+
+void RELAY_ON(void)
+{
+			Relay_ON;
+			Relay_Flag=Flag_ON;
+}
+
+void RELAY_OFF(void)
+{
+			Relay_OFF;
+			Relay_Flag=Flag_OFF;
+}
+
+
 
 

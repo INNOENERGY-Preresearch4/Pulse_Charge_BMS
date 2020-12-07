@@ -43,7 +43,7 @@ float Get_Pulse_Current(void)
 //		u8 i;
 		float cur;
 		cur = (Cur_Measure_V_Pulse-Cur_Ref_V_Pulse)/90.0f*1000*0.985f;
-		if((-100<cur)&&(cur<100))//È¥µô0µãÆ¯ÒÆºÍ²¨¶¯
+		if(((-100<cur)&&(cur<100))||(Relay_Flag==Flag_OFF))//È¥µô0µãÆ¯ÒÆºÍ²¨¶¯
 		{
 			cur = 0;
 		}
@@ -55,7 +55,7 @@ float Get_Filter_Current(void)
 {
 		volatile float cur;
 		cur = (Cur_Measure_V_Filter-Cur_Ref_V_Filter)/90.0f*1000*0.985f;
-		if((-100<cur)&&(cur<100))//È¥µô0µãÆ¯ÒÆºÍ²¨¶¯
+		if(((-100<cur)&&(cur<100))||(Relay_Flag==Flag_OFF))//È¥µô0µãÆ¯ÒÆºÍ²¨¶¯
 		{
 			cur = 0;
 		}
@@ -343,7 +343,7 @@ void Full_Capacity_Judgment(void)//³äµçÊ±ÅÐ¶ÏÊÇ·ñ³åÂú£¬·ÅµçÊ±ÅÐ¶ÏÊÇ·ñ²»Âú£¬²»³å²
 						 {
 								 Full_Capacity_Flag = 1;
 							 
-								 Relay_OFF;
+								 RELAY_OFF();
 								 CMD_Battery_Mode = 0;
 								 HAL_TIM_Base_Stop_IT(&TIM2_Handler);
 								 TIM2->CNT = 0;

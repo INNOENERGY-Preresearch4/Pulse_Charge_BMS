@@ -281,7 +281,7 @@ void Fault_Diagnose_Vol(void)
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_OVERPACKVOLTAGE_BIT;
 					 BMS_To_HMI.Pack_Alarms[0]|=ALARM_PACKVOLTAGE_OVER_PRE_BIT;//‘§æØπ ’œ“≤÷√Œª
 					 Full_Capacity_Flag =1;
-					 Relay_OFF;
+					 RELAY_OFF();
 			 } 
 	 }
 	 //µÁ≥ÿ◊È«∑—π«–∂œπ ’œ           3
@@ -300,7 +300,7 @@ void Fault_Diagnose_Vol(void)
 					 cutoff_lowpackvoltage_count=0;
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_LOWPACKVOLTAGE_BIT;
 					 BMS_To_HMI.Pack_Alarms[0] |= ALARM_PACKVOLTAGE_LOW_PRE_BIT;//‘§æØπ ’œ“≤÷√Œª
-					 Relay_OFF;
+					 RELAY_OFF();
 			 } 
 	 }
 	 //µÁ≥ÿµ•ÃÂπ˝—π«–∂œπ ’œ           4
@@ -319,7 +319,7 @@ void Fault_Diagnose_Vol(void)
 					 cutoff_overcellvoltage_count=0;
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_OVERCELLVOLTAGE_BIT;
 					 BMS_To_HMI.Pack_Alarms[1] |= ALARM_CELLVOLTAGE_OVER_PRE_BIT;//‘§æØπ ’œ“≤÷√Œª
-					 Relay_OFF;
+					 RELAY_OFF();
 			 } 
 	 }
 	 //µÁ≥ÿµ•ÃÂ«∑—π«–∂œπ ’œ           5
@@ -338,7 +338,7 @@ void Fault_Diagnose_Vol(void)
 					 cutoff_lowcellvoltage_count=0;
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_LOWCELLVOLTAGE_BIT;
 					 BMS_To_HMI.Pack_Alarms[1] |= ALARM_CELLVOLTAGE_LOW_PRE_BIT;//‘§æØπ ’œ“≤÷√Œª
-					 Relay_OFF;
+					 RELAY_OFF();
 			 } 
 	 }
 }
@@ -461,7 +461,7 @@ void Fault_Diagnose_Temp(void)
 					 cutoff_tempover_count=0;
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_OVERTEMP_BIT;
 					 BMS_To_HMI.Pack_Alarms[0]|=ALARM_OVERTEMP_PRE_BIT;//‘§æØ“≤÷√Œª
-					 Relay_OFF;
+					 RELAY_OFF();
 			 } 
 	 }
 	
@@ -483,7 +483,7 @@ void Fault_Diagnose_Discharge_COMM(void)
 		 {
 				Host_COMM_error_flag=1;
 				Host_COMM_error_cont=0;
-				Relay_OFF;
+				RELAY_OFF();
 		 }		 
 	}
 	else 
@@ -549,7 +549,7 @@ void Fault_Diagnose_Discharge_COMM(void)
 					 cutoff_dcurrent_count=0;
 					 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_DCOVERCURRENT_BIT;
 					 BMS_To_HMI.Pack_Alarms[1]|=ALARM_DCOVERCURRENT_PRE_BIT;
-					 Relay_OFF;
+					 RELAY_OFF();
 			 } 
 	 }
 }
@@ -611,7 +611,7 @@ void Fault_Diagnose_Charge(void)
 						 cutoff_ccurrent_count=0;
 						 BMS_To_HMI.Pack_Alarms[2] |= ALARM_CUTOFF_COVERCURRENT_BIT;
 						 BMS_To_HMI.Pack_Alarms[1]|=ALARM_COVERCURRENT_PRE_BIT;
-						 Relay_OFF;
+						 RELAY_OFF();
 				 } 
 		 }
 	}
@@ -1163,14 +1163,14 @@ void Fault_Protect(void)
 		{
 				if((BMS_To_HMI.Pack_Alarms[2]&0X2B) != 0)
 				{
-						Relay_OFF;
+						RELAY_OFF();
 				}
 		}
 		if(((BMS_To_HMI.Battery_Status&0x04) == 1)||(CMD_Battery_Mode == CMD_Discharge))//∑≈µÁ◊¥Ã¨
 		{
 				if((BMS_To_HMI.Pack_Alarms[2]&0x55) != 0)
 				{
-						Relay_OFF;
+						RELAY_OFF();
 				}
 		}
 }

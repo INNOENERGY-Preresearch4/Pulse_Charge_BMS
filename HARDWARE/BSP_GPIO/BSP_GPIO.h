@@ -63,5 +63,7 @@
 #define CH1_Toggle        (HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13)) 
 
 void GPIO_Init(void);
+void RELAY_ON(void);
+void RELAY_OFF(void);
 
 #endif
