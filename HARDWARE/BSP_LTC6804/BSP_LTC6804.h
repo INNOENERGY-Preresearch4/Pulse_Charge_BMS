@@ -205,7 +205,7 @@ void LTC6804_adax(LTC6804_handle * handle);
 void LTC6804_rdaux_reg(LTC6804_handle * handle, uint8_t reg);
 int8_t LTC6804_rdaux(LTC6804_handle * handle, uint8_t reg);
 
-void LTC6804_balance_cell(LTC6804_handle *handle, uint8_t channel);
+void LTC6804_balance_cell(LTC6804_handle *handle, uint16_t cell_num);
 int8_t read_cell_vol(LTC6804_handle *handle, uint16_t *cellvol);
 int8_t read_aux_vol(LTC6804_handle *handle,uint16_t *gpiovol);
 

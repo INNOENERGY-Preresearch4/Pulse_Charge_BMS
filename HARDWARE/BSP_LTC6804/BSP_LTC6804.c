@@ -156,43 +156,45 @@ uint16_t pec15_calc(uint8_t len, //Number of bytes that will be used to calculat
 }
 
 //¾ùºâ
-void LTC6804_balance_cell(LTC6804_handle *handle, uint8_t cell_num)
+void LTC6804_balance_cell(LTC6804_handle *handle, uint16_t cell_num)
 {
-    if ((cell_num >= 1) && (cell_num <= 8))
-    {
-        handle->chipConfig[0][4] = 1 << (cell_num-1);
-        handle->chipConfig[0][5] = 0;
-//        handle->chipConfig[1][4] = 0;
-//        handle->chipConfig[1][5] = 0;
-    }
-    else if ((cell_num >=9) && (cell_num <= 12))
-    {
-        handle->chipConfig[0][4] = 0;
-        handle->chipConfig[0][5] = 1 << (cell_num - 9);
-//        handle->chipConfig[1][4] = 0;
-//        handle->chipConfig[1][5] = 0;
-    }
-//    else if ((cell_num >=13) && (cell_num <= 20))
+//    if ((cell_num >= 1) && (cell_num <= 8))
+//    {
+//        handle->chipConfig[0][4] = 1 << (cell_num-1);
+//        handle->chipConfig[0][5] = 0;
+////        handle->chipConfig[1][4] = 0;
+////        handle->chipConfig[1][5] = 0;
+//    }
+//    else if ((cell_num >=9) && (cell_num <= 12))
+//    {
+//        handle->chipConfig[0][4] = 0;
+//        handle->chipConfig[0][5] = 1 << (cell_num - 9);
+////        handle->chipConfig[1][4] = 0;
+////        handle->chipConfig[1][5] = 0;
+//    }
+////    else if ((cell_num >=13) && (cell_num <= 20))
+////    {
+////        handle->chipConfig[0][4] = 0;
+////        handle->chipConfig[0][5] = 0;
+////        handle->chipConfig[1][4] = 1 << (cell_num - 13);
+////        handle->chipConfig[1][5] = 0;
+////    }
+////    else if ((cell_num >=21) && (cell_num <= 24))
+////    {
+////        handle->chipConfig[0][4] = 0;
+////        handle->chipConfig[0][5] = 0;
+////        handle->chipConfig[1][4] = 0;
+////        handle->chipConfig[1][5] = 1 << (cell_num - 21);
+////    }
+//    else 
 //    {
 //        handle->chipConfig[0][4] = 0;
 //        handle->chipConfig[0][5] = 0;
-//        handle->chipConfig[1][4] = 1 << (cell_num - 13);
-//        handle->chipConfig[1][5] = 0;
+////        handle->chipConfig[1][4] = 0;
+////        handle->chipConfig[1][5] = 0;
 //    }
-//    else if ((cell_num >=21) && (cell_num <= 24))
-//    {
-//        handle->chipConfig[0][4] = 0;
-//        handle->chipConfig[0][5] = 0;
-//        handle->chipConfig[1][4] = 0;
-//        handle->chipConfig[1][5] = 1 << (cell_num - 21);
-//    }
-    else 
-    {
-        handle->chipConfig[0][4] = 0;
-        handle->chipConfig[0][5] = 0;
-//        handle->chipConfig[1][4] = 0;
-//        handle->chipConfig[1][5] = 0;
-    }
+		handle->chipConfig[0][4] = (cell_num&0xFF);
+		handle->chipConfig[0][5] = ((cell_num&0xFF00)>>8);
     LTC6804_wrcfg(handle);
 }
 

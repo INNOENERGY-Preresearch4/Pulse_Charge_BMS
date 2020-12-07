@@ -186,29 +186,31 @@ void Temp_Collect_ByCycle(void)
 
 void Pack_Cell_Balance(void)
 {
-//		if((Max_CellVol >= CHARG_BLANCE_ON)&&((BMS_To_HMI.Pack_Alarms[1]&ALARM_CELLVOLTAGE_LOW_PRE_BIT) == 0))  //也不能在单体欠压时候去均衡，均衡容易把最高单体放欠压了
-		if(((BMS_To_HMI.Pack_Alarms[0]&ALARM_PACKVOLTAGE_LOW_PRE_BIT) == 0)&&((BMS_To_HMI.Pack_Alarms[1]&ALARM_CELLVOLTAGE_LOW_PRE_BIT) == 0))  //单体不欠压且电池组不欠压就均衡
+	  u8 i = 0;	
+	  if(((BMS_To_HMI.Pack_Alarms[0]&ALARM_PACKVOLTAGE_LOW_PRE_BIT) == 0)&&((BMS_To_HMI.Pack_Alarms[1]&ALARM_CELLVOLTAGE_LOW_PRE_BIT) == 0))  //单体不欠压且电池组不欠压就均衡
 		{
-				if(need_balance==0) 
-				{ 
-					 if(Max_CellVol>=(Min_CellVol+BALANCE_DIFF_VOLTAGE)) 
-					 {
-							 need_balance=1;
-							 LTC6804_balance_cell(&g_LTC6804Handle,Cell_Max_Num);
-					 }
-				} 
-				else 
+				for(i=0;i<BATTERY_COUNT;i++)
 				{
-					 if(Max_CellVol<(Min_CellVol+BALANCE_STOP_DIFF_VOLTAGE)) 
-					 {
-							 need_balance=0;
-							 LTC6804_balance_cell(&g_LTC6804Handle,0);
-					 }                       
+						if((balance_bit&(0x01<<i))==0) 
+						{ 
+							 if(BMS_To_HMI.Cell_Voltage[i] >= (BMS_To_HMI.Cell_Voltage[Cell_Min_Num-1]+BALANCE_DIFF_VOLTAGE)) 
+							 {
+									 balance_bit=(balance_bit|(0x0001<<i));
+							 }
+						} 
+						else 
+						{
+							 if(BMS_To_HMI.Cell_Voltage[i] <(BMS_To_HMI.Cell_Voltage[Cell_Min_Num-1]+BALANCE_STOP_DIFF_VOLTAGE)) 
+							 {
+									 balance_bit=(balance_bit&(~(0x0001<<i)));
+							 }                       
+						}
 				}
+				LTC6804_balance_cell(&g_LTC6804Handle,balance_bit);
 		}
 		else
 		{
-				need_balance = 0;
+				balance_bit = 0;
 				LTC6804_balance_cell(&g_LTC6804Handle,0);
 		}
 }
@@ -400,7 +402,7 @@ void Battery_Status_Judgment(void)
 				 BMS_To_HMI.Battery_Status|=0x08;
 			}
 			//均衡状态
-			if(need_balance == 1) 
+			if(balance_bit != 0) 
 			{
 				 BMS_To_HMI.Battery_Status|=0x10;
 			}
@@ -409,9 +411,9 @@ void Battery_Status_Judgment(void)
 
 void Balance_Ctrl(void)
 {
-			if(need_balance==1) 
+			if(balance_bit!=0) 
 			{
-					LTC6804_balance_cell(&g_LTC6804Handle,Cell_Max_Num);
+					LTC6804_balance_cell(&g_LTC6804Handle,balance_bit);
 			}else
 			{
 					LTC6804_balance_cell(&g_LTC6804Handle,0);
